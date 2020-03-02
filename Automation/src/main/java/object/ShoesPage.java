@@ -31,14 +31,23 @@ public class ShoesPage {
 	By elevenSize = By.xpath("//*[@id=\"x-refine__group_1__0\"]/ul/li[7]/div/a/div/div/span[1]");
 	By twelveSize = By.xpath("//*[@id=\"x-refine__group_1__0\"]/ul/li[8]/div/a/div/div/span[1]");
 	By numberResults = By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[2]/div/div[1]/h1/span[1]");
-	By orderBy = By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]");
+	By orderBy = By.tagName("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]");
 	By priceOne = By.xpath("//*[@id=\"srp-river-results-listing1\"]/div/div[2]/div[3]/div[1]/span[1]");
+	By priceTwo = By.xpath("//*[@id=\"srp-river-results-listing2\"]/div/div[2]/div[3]/div[1]/span");
+	By priceThree = By.xpath("//*[@id=\"srp-river-results-listing3\"]/div/div[2]/div[3]/div[1]/span[1]");
+	By priceFour = By.xpath("//*[@id=\"srp-river-results-listing4\"]/div/div[2]/div[3]/div[1]/span");
+	By priceFive = By.xpath("//*[@id=\"srp-river-results-listing5\"]/div/div[2]/div[3]/div[1]/span");
 	By firstDuration = By.xpath("//*[@id=\"w24-content-item[1]\"]'");
 	By recentAnnouncement = By.xpath("//*[@id=\"w24-content-item[2]\"]");
-	By lowerPrice = By.xpath("//*[@id=\"w23-content-0[3]\"]");
+	By lowerPrice = By.xpath("//*[@id=\"w24-content-0[3]\"]");
 	By higherPrice = By.xpath("//*[@id=\"w24-content-item[4]\"]");
 	By nearDistance = By.xpath("//*[@id=\"w24-content-item[5]\"]");
-	//By priceAscendant = By.xpath("");
+	By name1 =By.xpath("//*[@id=\"srp-river-results-listing1\"]/div/div[2]/a/h3");
+	By name2 =By.xpath("//*[@id=\"srp-river-results-listing2\"]/div/div[2]/a/h3");
+	By name3 =By.xpath("//*[@id=\"srp-river-results-listing3\"]/div/div[2]/a/h3");
+	By name4 =By.xpath("//*[@id=\"srp-river-results-listing4\"]/div/div[2]/a/h3");
+	By name5 =By.xpath("//*[@id=\"srp-river-results-listing5\"]/div/div[2]/a/h3");
+	
 	
 	public ShoesPage(WebDriver driver) {
 		this.driver = driver;
@@ -160,16 +169,9 @@ public class ShoesPage {
 	
 	public void clickOrderBy() {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		Boolean firstResult = new WebDriverWait(driver, 20)
-		        .until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"google_ads_iframe_/79850875/ebay.gbh.search/keywordsRR_0\"]"), "data-load-complete", "true"));
-		System.out.println(firstResult);
-		
 		driver.findElement(orderBy).click();
-		driver.findElement(lowerPrice).click();
 		
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//driver.findElement(lowerPrice).click();
+		
 	}
 	
 	
@@ -182,14 +184,15 @@ public class ShoesPage {
 		
 	}
 	public void selectLowerPrice() {
-		Actions action = new Actions(driver);
-		WebElement we =driver.findElement(orderBy);
-		action.moveToElement(we).moveToElement(driver.findElement(By.linkText("Precio + Envío: más bajo primero"))).click().build().perform();
-		//driver.findElement(lowerPrice).click();
+		//System.out.println(driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id"));
+		
+		driver.findElement(lowerPrice).click();
 		
 	}
 	public void selectHigherPrice() {
-		driver.findElement(higherPrice).click();
+		//System.out.println(driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id"));
+		
+	driver.findElement(higherPrice).click();
 		
 	}
 	public void selectNearDistance() {
@@ -216,8 +219,38 @@ public class ShoesPage {
 	
 	
 	public void orderResultsBy(String parameter) {
-		clickOrderBy();
-		//selectParameter(parameter);
+			
+			//clickOrderBy();
+			
+			if(driver.findElements(By.xpath("//*[@id=\"svg-icon-arrow-down\"]/path")).size()>0) {
+				driver.findElement(By.xpath("//*[@id=\"svg-icon-arrow-down\"]/path")).click();
+				
+				
+				String id =driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id").toString();
+				
+				firstDuration = By.xpath("//*[@id=\""+id+"-content-item[1]\"]'");
+				recentAnnouncement = By.xpath("//*[@id=\""+id+"-content-item[2]\"]");
+				lowerPrice = By.xpath("//*[@id=\""+id+"-content-item[3]\"]");
+				higherPrice = By.xpath("//*[@id=\""+id+"-content-item[4]\"]");
+				nearDistance = By.xpath("//*[@id=\""+id+"-content-item[5]\"]");
+				
+				
+			}
+			else {
+			driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]")).findElement(By.tagName("div")).click();
+			firstDuration = By.xpath("//*[@id=\"w23-content-0[1]\"]");
+			recentAnnouncement = By.xpath("//*[@id=\"w23-content-0[2]\"]");
+			lowerPrice = By.xpath("//*[@id=\"w23-content-0[3]\"]");
+			higherPrice = By.xpath("//*[@id=\"w23-content-0[4]\"]");
+			nearDistance = By.xpath("//*[@id=\"w23-content-0[5]\"]");
+			}
+			
+			
+			
+			
+			selectParameter(parameter);
+		
+		
 		
 	}
 	
@@ -225,11 +258,25 @@ public class ShoesPage {
 	public List<String> getTopPrices() {
 		
 		List <String> price = new ArrayList<>();
-		//price.add(driver.findElement(priceOne).getText().split(" "))*/
-		
-		System.out.println(driver.findElement(priceOne).getText());
-		
+		price.add(driver.findElement(priceOne).getText());
+		price.add(driver.findElement(priceTwo).getText());
+		price.add(driver.findElement(priceThree).getText());
+		price.add(driver.findElement(priceFour).getText());
+		price.add(driver.findElement(priceFive).getText());
 		return price;
+		
+	}
+	
+	
+	public List<String> getTopNames() {
+		
+		List <String> name = new ArrayList<>();
+		name.add(driver.findElement(name1).getText());
+		name.add(driver.findElement(name2).getText());
+		name.add(driver.findElement(name3).getText());
+		name.add(driver.findElement(name4).getText());
+		name.add(driver.findElement(name5).getText());
+		return name;
 		
 	}
 	
