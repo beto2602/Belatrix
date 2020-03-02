@@ -37,11 +37,16 @@ public class ShoesPage {
 	By priceThree = By.xpath("//*[@id=\"srp-river-results-listing3\"]/div/div[2]/div[3]/div[1]/span[1]");
 	By priceFour = By.xpath("//*[@id=\"srp-river-results-listing4\"]/div/div[2]/div[3]/div[1]/span");
 	By priceFive = By.xpath("//*[@id=\"srp-river-results-listing5\"]/div/div[2]/div[3]/div[1]/span");
-	By firstDuration = By.xpath("//*[@id=\"w24-content-item[1]\"]'");
-	By recentAnnouncement = By.xpath("//*[@id=\"w24-content-item[2]\"]");
-	By lowerPrice = By.xpath("//*[@id=\"w24-content-0[3]\"]");
-	By higherPrice = By.xpath("//*[@id=\"w24-content-item[4]\"]");
-	By nearDistance = By.xpath("//*[@id=\"w24-content-item[5]\"]");
+	By firstDurationBlue = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[2]/a/span");
+	By recentAnnouncementBlue = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[3]/a/span");
+	By lowerPriceBlue = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[4]/a/span");
+	By higherPriceBlue = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[5]/a/span");
+	By nearDistanceBlue = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[6]/a/span");
+	By firstDurationBlack = By.xpath("//*[@id=\"w23-content-0[1]\"]");
+	By recentAnnouncementBlack = By.xpath("//*[@id=\"w23-content-0[2]\"]");
+	By lowerPriceBlack = By.xpath("//*[@id=\"w23-content-0[3]\"]");
+	By higherPriceBlack = By.xpath("//*[@id=\"w23-content-0[4]\"]");
+	By nearDistanceBlack = By.xpath("//*[@id=\"w23-content-0[5]\"]");
 	By name1 =By.xpath("//*[@id=\"srp-river-results-listing1\"]/div/div[2]/a/h3");
 	By name2 =By.xpath("//*[@id=\"srp-river-results-listing2\"]/div/div[2]/a/h3");
 	By name3 =By.xpath("//*[@id=\"srp-river-results-listing3\"]/div/div[2]/a/h3");
@@ -174,94 +179,121 @@ public class ShoesPage {
 		
 	}
 	
-	
-	public void selectFirstDuration() {
-		driver.findElement(firstDuration).click();
+	public void selectFirstDurationBlue() {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
+		action.moveToElement(we).moveToElement(driver.findElement(firstDurationBlue)).click().build().perform();
 	}
 	
-	public void selectAnnouncement() {
-		driver.findElement(recentAnnouncement);
-		
+	public void selectAnnouncementBlue() {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
+		action.moveToElement(we).moveToElement(driver.findElement(recentAnnouncementBlue)).click().build().perform();
 	}
-	public void selectLowerPrice() {
-		//System.out.println(driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id"));
-		
-		driver.findElement(lowerPrice).click();
-		
+	
+	public void selectLowerPriceBlue() {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
+		action.moveToElement(we).moveToElement(driver.findElement(lowerPriceBlue)).click().build().perform();
 	}
-	public void selectHigherPrice() {
-		//System.out.println(driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id"));
-		
-	driver.findElement(higherPrice).click();
-		
+	
+	public void selectHigherPriceBlue() {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
+		action.moveToElement(we).moveToElement(driver.findElement(higherPriceBlue)).click().build().perform();
 	}
-	public void selectNearDistance() {
-		driver.findElement(nearDistance).click();
-		
+	
+	public void selectNearDistanceBlue() {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
+		action.moveToElement(we).moveToElement(driver.findElement(nearDistanceBlue)).click().build().perform();
 	}
-	public void selectParameter(String parameter) {
+	
+	public void selectParameterBlue(String parameter) {
 		switch(parameter) {
 		
-		case "Duration": selectFirstDuration();
+		case "Duration": selectFirstDurationBlue();
 			break;
-		case "Announcement": selectAnnouncement();
+		case "Announcement": selectAnnouncementBlue();
 			break;
-		case "Lower": selectLowerPrice();
+		case "Lower": selectLowerPriceBlue();
 			break;
-		case "Higher": selectHigherPrice();
+		case "Higher": selectHigherPriceBlue();
 			break;
-		case "nearDistance": selectNearDistance();
+		case "nearDistance": selectNearDistanceBlue();
 			break;
 		
 		}
 	}
 	
+	public void selectFirstDurationBlack() {
+		driver.findElement(firstDurationBlack).click();
+	}
 	
+	public void selectAnnouncementBlack() {
+		driver.findElement(recentAnnouncementBlack);
+	}
+	
+	public void selectLowerPriceBlack() {
+		driver.findElement(lowerPriceBlack).click();
+	}
+	
+	public void selectHigherPriceBlack() {
+		driver.findElement(higherPriceBlack).click();
+	}
+	
+	public void selectNearDistanceBlack() {
+		driver.findElement(nearDistanceBlack).click();
+	}
+	
+	public void selectParameterBlack(String parameter) {
+		switch(parameter) {
+		
+		case "Duration": selectFirstDurationBlack();
+			break;
+		case "Announcement": selectAnnouncementBlack();
+			break;
+		case "Lower": selectLowerPriceBlack();
+			break;
+		case "Higher": selectHigherPriceBlack();
+			break;
+		case "nearDistance": selectNearDistanceBlack();
+			break;
+		
+		}
+	}
 	
 	public void orderResultsBy(String parameter) {
 			
 			
 			if(driver.findElements(By.xpath("//*[@id=\"w23-content-0[1]\"]")).size()==0) {
 				
+				selectParameterBlue(parameter);
 				
-				
-				
+				/*
 				Actions action = new Actions(driver);
 				WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
-				action.moveToElement(we).build().perform();
-				
-				
-				//Here is
-				
-				driver.findElement(By.partialLinkText("https://www.ebay.com/sch/i.html?_from=R40&_nkw=shoes&_sacat=0&Brand=PUMA")).click();;
-			
-				
-				String id =driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id").toString();
-				
-				
-				
-				
-				firstDuration = By.xpath("//*[@id=\""+id+"-content-item[1]\"]'");
-				recentAnnouncement = By.xpath("//*[@id=\""+id+"-content-item[2]\"]");
-				lowerPrice = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[4]");
-				higherPrice = By.xpath("//*[@id=\""+id+"-content-item[4]\"]");
-				nearDistance = By.xpath("//*[@id=\""+id+"-content-item[5]\"]");
-				
-				
+				action.moveToElement(we).moveToElement(driver.findElement(By.xpath("//*[@id=\"w9\"]/div/div/ul/li[4]/a/span"))).click().build().perform();
+				*/
+							
 			}
 			else {
 			driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]")).findElement(By.tagName("div")).click();
+			/*
 			firstDuration = By.xpath("//*[@id=\"w23-content-0[1]\"]");
 			recentAnnouncement = By.xpath("//*[@id=\"w23-content-0[2]\"]");
 			lowerPrice = By.xpath("//*[@id=\"w23-content-0[3]\"]");
 			higherPrice = By.xpath("//*[@id=\"w23-content-0[4]\"]");
 			nearDistance = By.xpath("//*[@id=\"w23-content-0[5]\"]");
+			*/
+			selectParameterBlack(parameter);
+			
 			}
 			
 			
 			
 			
-			selectParameter(parameter);
+			
 		
 		
 		
