@@ -1,7 +1,16 @@
 package object;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ShoesPage {
 	WebDriver driver;
@@ -22,6 +31,13 @@ public class ShoesPage {
 	By elevenSize = By.xpath("//*[@id=\"x-refine__group_1__0\"]/ul/li[7]/div/a/div/div/span[1]");
 	By twelveSize = By.xpath("//*[@id=\"x-refine__group_1__0\"]/ul/li[8]/div/a/div/div/span[1]");
 	By numberResults = By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[2]/div/div[1]/h1/span[1]");
+	By orderBy = By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]");
+	By priceOne = By.xpath("//*[@id=\"srp-river-results-listing1\"]/div/div[2]/div[3]/div[1]/span[1]");
+	By firstDuration = By.xpath("//*[@id=\"w24-content-item[1]\"]'");
+	By recentAnnouncement = By.xpath("//*[@id=\"w24-content-item[2]\"]");
+	By lowerPrice = By.xpath("//*[@id=\"w23-content-0[3]\"]");
+	By higherPrice = By.xpath("//*[@id=\"w24-content-item[4]\"]");
+	By nearDistance = By.xpath("//*[@id=\"w24-content-item[5]\"]");
 	//By priceAscendant = By.xpath("");
 	
 	public ShoesPage(WebDriver driver) {
@@ -135,8 +151,89 @@ public class ShoesPage {
 		}
 	}
 	
+	
+	
 	public void numberResults() {
 		String text = driver.findElement(numberResults).getText();
 		System.out.println(text + " Results");
 	}
+	
+	public void clickOrderBy() {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		Boolean firstResult = new WebDriverWait(driver, 20)
+		        .until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"google_ads_iframe_/79850875/ebay.gbh.search/keywordsRR_0\"]"), "data-load-complete", "true"));
+		System.out.println(firstResult);
+		
+		driver.findElement(orderBy).click();
+		driver.findElement(lowerPrice).click();
+		
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//driver.findElement(lowerPrice).click();
+	}
+	
+	
+	public void selectFirstDuration() {
+		driver.findElement(firstDuration).click();
+	}
+	
+	public void selectAnnouncement() {
+		driver.findElement(recentAnnouncement);
+		
+	}
+	public void selectLowerPrice() {
+		Actions action = new Actions(driver);
+		WebElement we =driver.findElement(orderBy);
+		action.moveToElement(we).moveToElement(driver.findElement(By.linkText("Precio + Envío: más bajo primero"))).click().build().perform();
+		//driver.findElement(lowerPrice).click();
+		
+	}
+	public void selectHigherPrice() {
+		driver.findElement(higherPrice).click();
+		
+	}
+	public void selectNearDistance() {
+		driver.findElement(nearDistance).click();
+		
+	}
+	public void selectParameter(String parameter) {
+		switch(parameter) {
+		
+		case "Duration": selectFirstDuration();
+			break;
+		case "Announcement": selectAnnouncement();
+			break;
+		case "Lower": selectLowerPrice();
+			break;
+		case "Higher": selectHigherPrice();
+			break;
+		case "nearDistance": selectNearDistance();
+			break;
+		
+		}
+	}
+	
+	
+	
+	public void orderResultsBy(String parameter) {
+		clickOrderBy();
+		//selectParameter(parameter);
+		
+	}
+	
+	
+	public List<String> getTopPrices() {
+		
+		List <String> price = new ArrayList<>();
+		//price.add(driver.findElement(priceOne).getText().split(" "))*/
+		
+		System.out.println(driver.findElement(priceOne).getText());
+		
+		return price;
+		
+	}
+	
+	
+
+	 
 }
