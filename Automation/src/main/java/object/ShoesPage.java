@@ -220,17 +220,30 @@ public class ShoesPage {
 	
 	public void orderResultsBy(String parameter) {
 			
-			//clickOrderBy();
 			
-			if(driver.findElements(By.xpath("//*[@id=\"svg-icon-arrow-down\"]/path")).size()>0) {
-				driver.findElement(By.xpath("//*[@id=\"svg-icon-arrow-down\"]/path")).click();
+			if(driver.findElements(By.xpath("//*[@id=\"w23-content-0[1]\"]")).size()==0) {
 				
+				
+				
+				
+				Actions action = new Actions(driver);
+				WebElement we = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/div/div[1]/div[3]/div[1]"));
+				action.moveToElement(we).build().perform();
+				
+				
+				//Here is
+				
+				driver.findElement(By.partialLinkText("https://www.ebay.com/sch/i.html?_from=R40&_nkw=shoes&_sacat=0&Brand=PUMA")).click();;
+			
 				
 				String id =driver.findElement(orderBy).findElement(By.className("srp-sort")).findElement(By.tagName("span")).getAttribute("id").toString();
 				
+				
+				
+				
 				firstDuration = By.xpath("//*[@id=\""+id+"-content-item[1]\"]'");
 				recentAnnouncement = By.xpath("//*[@id=\""+id+"-content-item[2]\"]");
-				lowerPrice = By.xpath("//*[@id=\""+id+"-content-item[3]\"]");
+				lowerPrice = By.xpath("//*[@id=\"w9\"]/div/div/ul/li[4]");
 				higherPrice = By.xpath("//*[@id=\""+id+"-content-item[4]\"]");
 				nearDistance = By.xpath("//*[@id=\""+id+"-content-item[5]\"]");
 				
